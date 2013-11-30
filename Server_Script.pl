@@ -5,23 +5,31 @@ use warnings;
 use IO::Socket::INET;
 
 my $socket;
+my  $clientsocket;
 my $serverdata;
 my $clientdata;
 
 $socket = new IO::Socket::INET (
-  PeerHost => '127.0.0.1',
-  PeerPort => '0155',
-  Proto => 'tcp',
-) or die "$!\n";
+    LocalHost => '127.0.0.1',
+    LocalPort => '0155',
+    Proto => 'tcp',
+    Listen => 1,
+    Reuse => 1
+) or die "Oops: $! \n";
+print "Waiting for the Client.\n";
 
-print "Connected to the Server.\n";
 
-# read the message sent by server.
-$serverdata = <$socket>;
-print "Message from Server : $serverdata \n";
+$clientsocket = $socket->accept();
 
-# Send some message to server.
-$clientdata = "This is the Client speaking :)";
-print $socket "$clientdata \n";
+print   "Connected from : ", $clientsocket->peerhost();     # Display messages
+print   ", Port : ", $clientsocket->peerport(), "\n";
 
-$socket->close();
+# Write some data to the client  
+$serverdata = "This is the Server speaking :)\n";
+print $clientsocket "$serverdata \n";
+
+# read the data from the client
+$clientdata = <$clientsocket>;
+print "Message received from Client : $clientdata\n";
+
+$socket->close();  
