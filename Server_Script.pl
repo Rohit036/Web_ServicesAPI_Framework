@@ -29,7 +29,15 @@ $serverdata = "This is the Server speaking :)\n";
 print $clientsocket "$serverdata \n";
 
 # read the data from the client
-$clientdata = <$clientsocket>;
+while($clientdata = <$clientsocket>)
+{
+if(($clientdata eq "quit") or ($clientdata eq ""))
+{
+$socket->close();
+}
+else
+{
 print "Message received from Client : $clientdata\n";
-
-$socket->close();  
+}
+}
+#$socket->close();
