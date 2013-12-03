@@ -18,13 +18,26 @@ print "Connected to the Server.\n";
 
 # read the message sent by server.
 $serverdata = <$socket>;
-print "Message from Server : $serverdata \n";
+print "Message from Server : $serverdata";
+$serverdata = <$socket>;
+print "$serverdata";
+
+
+while($serverdata = <$socket>)
+{
+print "$serverdata";
+#}
 
 # Send some message to server.
 #$clientdata = "This is the Client speaking :)";
-print "Type name of file to execute\n";
-while($clientdata = <STDIN>)
-{
+
+#while(1)
+#{
+#if($serverdata = <$socket>)
+#{
+#print $serverdata."\n";
+#}
+$clientdata = <STDIN>;
 chomp($clientdata);
 if($clientdata eq "quit")
 {
@@ -33,11 +46,6 @@ last;
 }
 else
 {
-print "\n1.Type name of file to execute\n";
-print "2.Type quit to exit\n\n";
 print $socket "$clientdata\n";
 }
 }
-#print $socket "$clientdata \n";
-
-#$socket->close();
