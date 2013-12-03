@@ -5,9 +5,19 @@ use warnings;
 use IO::Socket::INET;
 
 my $socket;
-my  $clientsocket;
+my $clientsocket;
 my $serverdata;
 my $clientdata;
+my @myarray;
+my @data;
+my $mystring;
+our %file_methods = ();
+
+%file_method = (
+"add.pl" => [add,subtract,multiply,divide]
+);
+
+    
 
 $socket = new IO::Socket::INET (
     LocalHost => '127.0.0.1',
@@ -27,6 +37,11 @@ print   ", Port : ", $clientsocket->peerport(), "\n";
 # Write some data to the client  
 $serverdata = "This is the Server speaking :)\n";
 print $clientsocket "$serverdata \n";
+$serverdata = "1.add 2.subtract 3.multiply 4.divide \n";
+print $clientsocket "$serverdata \n";
+
+#$serverdata = <STDIN>;
+#print $clientsocket "$serverdata";
 
 # read the data from the client
 while($clientdata = <$clientsocket>)
@@ -38,6 +53,14 @@ $socket->close();
 else
 {
 print "Message received from Client : $clientdata\n";
+@data = split(" ", $clientdata);
+
+#my $filename = shift @data;
+my $input_method = shift @data;
+if ()
+
+#@myarray = `$filename $input`;
+#$mystring = join("", @myarray);
+print $clientsocket "$mystring \n";
 }
 }
-#$socket->close();
