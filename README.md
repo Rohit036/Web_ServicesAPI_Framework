@@ -41,7 +41,20 @@ The document is intended to be read by developers, users and testers.
 The rest of the documents contains every aspect of the project. For better understanding of the project one should start from the very next page. For fast reference the page numbers are given accordingly to the Audience type.
 
 1.4 Project Scope
-First of all the project is Open Source which makes it widely used by the  
-<Provide a short description of the software being specified and its purpose, including relevant benefits, objectives, and goals. Relate the software to corporate goals or business strategies. If a separate vision and scope document is available, refer to it rather than duplicating its contents here. An SRS that specifies the next release of an evolving product should contain its own scope statement as a subset of the long-term strategic product vision.>
+First of all the project is Open Source which makes it widely used by the small individuals in the offices or the university level. Where the access to the web services are restricted to the small number of people.
+We are going to make the services available as API to the developers who wants to access the service for their benefit.
+
+1.5 References 
+•	https://www.github.com/Rohit036
+•	https://stackoverflow.com
+•	http://perldoc.perl.org
+
+
+2. Overall Description 
+
+2.1 Product Perspective 
+The project is follow up member of the existing product. There are several big players in the market for providing the API framework to provide web services like Google Maps, Twitter from where people can use the API for their work.
+We are making a system that will be fully automated to upload the service and to use the service too.
+
 
 
