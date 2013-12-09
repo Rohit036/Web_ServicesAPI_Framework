@@ -19,13 +19,11 @@ print "Connected to the Server.\n";
 # read the message sent by server.
 $serverdata = <$socket>;
 print "Message from Server : $serverdata";
-$serverdata = <$socket>;
-print "$serverdata";
 
 
-while($serverdata = <$socket>)
-{
-print "$serverdata";
+#while($serverdata = <$socket>)
+#{
+#print "$serverdata";
 #}
 
 # Send some message to server.
@@ -33,12 +31,19 @@ print "$serverdata";
 
 #while(1)
 #{
-#if($serverdata = <$socket>)
-#{
-#print $serverdata."\n";
-#}
 $clientdata = <STDIN>;
 chomp($clientdata);
+my $i = 0;
+while($i < 2)
+{
+if($serverdata = <$socket>)
+{
+print $serverdata;
+#print "1.Type filename with parameters to execute \n";
+#print "2.Type quit to exit \n";
+}
+#$clientdata = <STDIN>;
+#chomp($clientdata);
 if($clientdata eq "quit")
 {
 $socket->close();
@@ -48,4 +53,6 @@ else
 {
 print $socket "$clientdata\n";
 }
+$i++;
 }
+#}
