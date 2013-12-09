@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-
+require "add.pl";
 use strict;
 use warnings;
 use IO::Socket::INET;
@@ -11,10 +11,10 @@ my $clientdata;
 my @myarray;
 my @data;
 my $mystring;
-our %file_methods = ();
+our %filemethods = ();
 
-%file_method = (
-"add.pl" => [add,subtract,multiply,divide]
+%filemethods = (
+"add.pl" => ["add","subtract","multiply","divide"]
 );
 
     
@@ -37,8 +37,8 @@ print   ", Port : ", $clientsocket->peerport(), "\n";
 # Write some data to the client  
 $serverdata = "This is the Server speaking :)\n";
 print $clientsocket "$serverdata \n";
-$serverdata = "1.add 2.subtract 3.multiply 4.divide \n";
-print $clientsocket "$serverdata \n";
+#$serverdata = "1.add 2.subtract 3.multiply 4.divide \n";
+#print $clientsocket "$serverdata \n";
 
 #$serverdata = <STDIN>;
 #print $clientsocket "$serverdata";
@@ -55,12 +55,14 @@ else
 print "Message received from Client : $clientdata\n";
 @data = split(" ", $clientdata);
 
-#my $filename = shift @data;
-my $input_method = shift @data;
-if ()
+my $methodname = shift @data;
+my $input = shift @data;
+my $input1 = shift @data;
+
 
 #@myarray = `$filename $input`;
-#$mystring = join("", @myarray);
+$mystring = &{\&{$methodname}}($input, $input1);
 print $clientsocket "$mystring \n";
+#print $clientsocket "1.add 2.subtract 3.multiply 4.divide \n";
 }
 }
