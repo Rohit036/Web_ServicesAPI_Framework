@@ -1,9 +1,14 @@
 #!/usr/bin/perl
-
+sub remote_proc
+{
 use strict;
 use warnings;
 use IO::Socket::INET;
 
+my $method = $_[0];
+my $input = $_[1];
+my $input1 = $_[2];
+my $ans;
 my $socket;
 my $serverdata;
 my $clientdata;
@@ -20,15 +25,13 @@ print "Connected to the Server.\n";
 $serverdata = <$socket>;
 print "Message from Server : $serverdata";
 
-$clientdata = <STDIN>;
-chomp($clientdata);
+$clientdata = $method." ".$input." ".$input1;
 my $i = 0;
 while($i < 2)
 {
 if($serverdata = <$socket>)
 {
-print $serverdata;
-
+$ans = $serverdata;
 }
 if($clientdata eq "quit")
 {
@@ -41,3 +44,6 @@ print $socket "$clientdata\n";
 }
 $i++;
 }
+return $ans;
+}
+1;
